@@ -1,0 +1,77 @@
+1. Node is not a language it is an environment to write js.
+
+2. npm init will create a package.json file.
+
+3. To create a node file write in the terminal node FileName and it will 		create it a node file 
+
+4. In order to create a server you need to first create a package.json file 	using npm init then you need to manually make a type property 		and set it to module then import http from node:http
+
+5. You can use the createServer() method from http to create a server 		and set it to a const. It will take in two parameters req and 		res 
+
+6. res.end() can be used to execute code whenever npm start is used
+
+7. Server can use a use a listen method which takes in a port and a 		call back funtion as a parameter
+
+8. res.write() can also be used to send a response,with a string as a 		parameter , but writing res.end() is compulsory for a res to		pass through
+
+9. server.listen() is important is it specifies the port number to send 	respones to
+
+10. The req object in http.createServer has a method of url that returns    	the url also it has a property of method that returns the 	method e.g GET PUT etc
+
+11. The server can return anything only in a string format so in order to 		pass anything just use JSON.stringify()
+
+12. The res object also needs to specify the type of data to send. The 		setHeader() method is used to do it pass in two strings one being
+	the other being type e.g "application/json"
+
+13. The .startsWith() takes in a string as an argument and checks whether 	a string starts with the argument it returns boolean
+
+14. The .charAt() method takes in an integer as an argument and returns 		the character at that point,Combining it with slice can help 		create a string with the first letter as uppercase
+
+15. In order to get a url from the req.url object we use the new Url class 
+	const url = new Url (req.url, http://req.header.host) //Use 		template literals and commas
+	After that we can use the Object.fromEntries() and pass in 		url.searchParams to get the key value pairs of search params
+
+16. If you return html the status type will be text/html
+
+17. import.meta.dirname can be used to get the current directory and then 
+	can be used to create absolute and relative paths. e.g 		const absPath = path.join(dir folderName fileName)
+	const relPath = path.join(folderName fileName)
+
+18. All the above can be done by importing path from node:path
+
+19. The fs can be imported into node js and can be used to 	read/write/update files e.g const content = fs.readFileSync(path)
+	this is used for sync processes but it is not recommended
+
+20. There is a way to make reading and sending files to be async 
+	first import node:fs/promises insted of node:fs
+	then convert the createServer method into async
+	then use await and store value of await fs.readFile(path)
+	then use res.end(value)
+
+21. Encoding type can also be used when reading fileds e.g fs.readFile	(path,utf-8) but there is a problem it will convert images into 	strings so it is better to use none.
+
+22. If no encoding is used it will return objects in a buffer datatype which 	is unreadable by the user but readable by the browser
+
+23. The path.extname() method can be used to get the extension of the file 
+	for example .js for javascript.
+
+24. There is a different content-type for every extension so a for every 		extension there should be a different application type to be used
+
+25. When a post request is sent to the server and a data is being sent, it 		is an async process. It is sent in the form of chunks one by one 		In order to get all of them a string variable should be 	initialised and a for chunks of req loop should be used using 	await the string variable should be concatenated
+
+26. When you throw an error program execution stops and the js goes 	straight to the catch block and executes code in it
+
+27. You can also writeFiles which is creating a new file just pass in path 	data and encoding as a parameter fs.writeFile(a b c); also use 	await
+
+28. You need to sanitize the post methods before uploading to the server as 	some people might try to use script or style tags to change  	output or cause errors so an npm package called sanitize-html 	can be used it will remove all html tags you want
+
+29. The EventEmitter class can be imported from node:events and it 		needs to be needed an instance then a function is to be created 		then an on method is added with parameter of the instance and 		function then the .emit method is used which signals what should 		be done when the event is triggered using.on and the parameter 		of .on is passed in it too and it also takes in the instance as a 		parameter. The first parameter of is the same for the .on and 		the .emit method and the .emit method must contain the 	parameter of the function of .on that is passed in the argument
+
+30. Server sent events can be used to update data continously like ,e.g 	weather apis in this two res.setHeader() are used one with the 	parameters of content-type and text/event-stream and the 	other with Cache-Control and no-cache. There should be 	another one of this with the parametes of Connection and 	keep-alive
+
+31. Also res.end() should not be used with it as it will end the connection 	res.write() should be used `data: ${JSON.stringify({ event: 	'temp-updated', temp: temperature})}\n\n`data should be passed in 	this convention in setInterval as it is continously passed
+
+32. In index.js on the front end in order to get this data you can create 	an instance of the EventSource class and pass in the req.url in 	which the res.write() is being done then the on message could be 	used to get the data passed every timeout
+
+33. res.setHeader("Allow-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Methods","GET,POST"); 	//These two lines are required to access api in project
